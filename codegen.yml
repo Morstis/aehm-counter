@@ -1,0 +1,28 @@
+overwrite: true
+schema:
+  "http://localhost:8080/v1/graphql":
+     headers:
+        "x-hasura-admin-secret": "secretHasuraPassword"
+documents:
+  - "src/**/*.graphql"
+generates:
+  generated/types.graphql-gen.ts:
+    plugins:
+      - "typescript"
+    config:
+      scalars:
+        uuid: string
+        timestamptz: "string | Date"
+
+  generated/:
+    preset: near-operation-file
+    presetConfig:
+      extension: .gen.ts
+      baseTypesPath: types.graphql-gen.ts
+    plugins:
+      - "typescript-operations"
+    config:
+      addExplicitOverride: true
+      scalars:
+          uuid: string
+          timestamptz: "string | Date"

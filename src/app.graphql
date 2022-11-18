@@ -1,0 +1,28 @@
+query currentCount {
+  users_aggregate {
+    aggregate {
+      avg {
+        count
+      }
+      min {
+        count
+      }
+      max {
+        count
+      }
+    }
+  }
+}
+
+mutation createUser($name: String = "") {
+  insertUser(object: { name: $name }) {
+    id
+  }
+}
+
+mutation updateCount($id: uuid = "") {
+  updateCount(pk_columns: { id: $id }, _inc: { count: 1 }) {
+    count
+    id
+  }
+}

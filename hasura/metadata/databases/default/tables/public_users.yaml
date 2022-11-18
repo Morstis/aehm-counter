@@ -1,0 +1,31 @@
+table:
+  name: users
+  schema: public
+configuration:
+  column_config: {}
+  custom_column_names: {}
+  custom_root_fields:
+    insert_one: insertUser
+    update_by_pk: updateCount
+insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+        - name
+select_permissions:
+  - role: public
+    permission:
+      columns:
+        - count
+        - id
+        - name
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: public
+    permission:
+      columns:
+        - count
+      filter: {}
+      check: null
